@@ -6,6 +6,7 @@ window.addEventListener('scroll', function() {
     const svgElement = document.getElementById('mySVG');
     const navButtons = document.querySelector('.navbar');
     const outputDiv = document.getElementById('output');
+    const wordDiv = document.getElementById('word');
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     if (Math.abs(scrollTop - lastScrollTop) >= 130) {
@@ -19,6 +20,7 @@ window.addEventListener('scroll', function() {
             svgContainer.style.height = '22px';
             navButtons.style.display = 'none'; 
             //outputDiv.style.display = 'block';
+            wordDiv.style.fontSize = '28px';
             
         } else {
             document.body.classList.remove('scrolled-up');
@@ -30,6 +32,7 @@ window.addEventListener('scroll', function() {
             svgContainer.style.height = '26px';
             navButtons.style.display = 'block';
             //outputDiv.style.display = 'none';
+            wordDiv.style.fontSize = '14px';
             
         }
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
