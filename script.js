@@ -1,5 +1,5 @@
 
-let lastScrollTop = 0;
+let lastScrollTop = 20;
 
 window.addEventListener('scroll', function() {
     const svgContainer = document.querySelector('.svg-container');
@@ -9,16 +9,16 @@ window.addEventListener('scroll', function() {
     const wordDiv = document.getElementById('word');
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (Math.abs(scrollTop - lastScrollTop) >= 130) {
+    if (scrollTop < 200) {
         if (scrollTop < lastScrollTop) {
             document.body.classList.add('scrolled-up');
             svgElement.src = 'logo.svg';
-            svgContainer.style.top = '50%';
-            svgContainer.style.left = '50%';
+            svgContainer.style.top = '44.5%';
+            svgContainer.style.left = '48.5%';
             svgContainer.style.transform = 'translate(-50%, -50%)';
             svgContainer.style.width = '250px';
             svgContainer.style.height = '22px';
-            navButtons.style.display = 'none'; 
+            navButtons.style.display = 'none';
             //outputDiv.style.display = 'block';
             wordDiv.style.fontSize = '28px';
             
@@ -35,11 +35,10 @@ window.addEventListener('scroll', function() {
             wordDiv.style.fontSize = '14px';
             
         }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
     }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
-
-
 
 
 function printSentenceWithBlinking(sentences) {
@@ -47,7 +46,6 @@ function printSentenceWithBlinking(sentences) {
     let sentenceIndex = 0;
     let index = 0;
     let printInterval;
-  
     function printWithBlinkingUnderscore() {
       const currentSentence = sentences[sentenceIndex];
       printInterval = setInterval(() => {
@@ -66,7 +64,6 @@ function printSentenceWithBlinking(sentences) {
         }
       }, 200); // Adjust interval for faster printing
     }
-  
     function removeBackward(sentence) {
       printInterval = setInterval(() => {
         if (index >= 0) {
@@ -99,3 +96,30 @@ function printSentenceWithBlinking(sentences) {
   
   printSentenceWithBlinking(sentences); // Call the function with the array of sentences
   
+//navigation
+//for responsive navbar
+function toggleNav() {
+    var nav = document.getElementById("myNav");
+    var bars = document.querySelector('.container');
+    
+    // Toggle navigation visibility
+    if (nav.style.display === "block") {
+        nav.style.display = "none";
+        bars.classList.remove("change");
+    } else {
+        nav.style.display = "block";
+        bars.classList.add("change");
+    }
+}
+
+// Reset navigation when a link is clicked
+document.addEventListener('click', function(event) {
+    var nav = document.getElementById("myNav");
+    var bars = document.querySelector('.container');
+
+    // Check if the clicked element is a link within the navigation
+    if (event.target.tagName.toLowerCase() === 'a' && nav.contains(event.target)) {
+        nav.style.display = "none";
+        bars.classList.remove("change");
+    }
+});
