@@ -5,70 +5,112 @@ body, html {
     font-family: Arial, sans-serif;
     background-color: rgb(23, 23, 23);
 }
-ul{
+ul p{
     margin: 0;
+    color: whitesmoke;
 }
+p{
+    color: #0277bd;
+}
+
 .svg-container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    transition: all 0.8s ease;
-    width: 300px;  
-    height: 155px; 
+    transition: all 0.5s ease;
+    width: 300px;
+    height: 110px;
     z-index: 3;
 }
 .content {
-    margin-top: 110vh; 
+    margin-top: 140vh;
     padding: 20px;
     font-size: 18px;
+    display: grid;
+    grid-template-columns: 0.5fr 3.5fr 1.5fr;
+
 }
 
 .scrolled-up .svg-container {
     top: 30px;
     left: 30px;
     transform: translate(0, 0);
-    width: 150px; 
-    height: 26px; 
+    width: 150px;
+    height: 26px;
 }
 #word {
     color: rgb(255, 255, 255); /* Change the color here */
   }
   
 /* For Search button*/
-.fa-search {
-    color: #b0b0b0;
-    margin-left: 20px;
-    margin-right: 90vh;
-}
-#Search{
-    margin-left: 20px;
-    font-size: 15px;
-    font-family: Arial, sans-serif;
-    font-weight: 0;
-}
-button {
-    background-color: #2c2c2c;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px;
-    margin-right: 10px;
-    width: 200px;
-    height: 20px;
+.searchBox {
+
+    background: #275595;
+    height: 30px;
+    border-radius: 40px;
+    padding:5px;
+
 }
 
+.searchBox:hover > .searchInput {
+    width: 240px;
+    padding: 0 6px;
+}
+
+.searchBox:hover > .searchButton {
+  background: white;
+  color : #2f3640;
+}
+
+.fa-search {
+    position: relative;
+    color: white;
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 30px;
+    width: 0px;
+
+}
+@media screen and (max-width: 620px) {
+.searchBox:hover > .searchInput {
+    width: 150px;
+    padding: 0 6px;
+}
+}
+
+.highlight {
+    background-color: yellow;
+    transition: background-color 1s ease;
+}
 /* Base styles for the navbar */
 .navbar {
     position: fixed;
     top: 0px;
     right: 0px; 
     display: none; /* Hide by default */
-    padding-top: 20px;
+    
+    padding-top: 10px;
     width: 100%;
-    height: 70px;
+    height: 80px;
     background-color: #000000;
 }
 
@@ -86,6 +128,7 @@ button {
 /* Navbar right section */
 .navright {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     padding: 5px;
     margin-right: 20px;
@@ -115,16 +158,16 @@ button {
 }
 
 .bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
+    width: 25px;
+    height: 3px;
     background-color: #fcfcfc;
-    margin: 6px 0;
+    margin: 5px 0;
     transition: 0.4s;
 }
 
 /* Hamburger menu transformation */
 .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
+    transform: translateY(8px) rotate(-45deg);
 }
 
 .change .bar2 {
@@ -132,23 +175,50 @@ button {
 }
 
 .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
+    transform: translateY(-8px) rotate(45deg);
 }
-
 svg:hover {
     fill: initial;
 }
 
 /* Navbar links */
 .navbar a {
-    color: rgb(255, 255, 255);
+    color: #737373;
     text-decoration: none;
-    border-radius: 5%; /* Add border radius to the links */
+    
+    margin: 0px 10px;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+}
+div.nav-desktop a:before, div.nav-desktop a:after
+{
+    position: absolute;
+    opacity: 0;
+    width: 0%;
+    height: 2px;
+    content: '';
+    background: #ffffff;
+    transition: all 0.3s;
 }
 
-.navbar a:hover {
-    color: rgb(127, 197, 244);
-    text-shadow: 0 0 15px rgb(10, 10, 10);
+div.nav-desktop a:before
+{
+    left: 0px;
+    top: 0px;
+}
+
+div.nav-desktop a:after
+{
+    right: 0px;
+    bottom: 0px;
+}
+
+div.nav-desktop a:hover:before, div.nav-desktop a:hover:after
+{
+    opacity: 1;
+    width: 100%;
 }
 
 /* List items style reset */
@@ -156,33 +226,115 @@ li {
     list-style-type: none;
 }
 
-/* Desktop navigation styles */
-.nav-desktop {
-    display: flex;
-    gap: 20px; /* Adjust the gap between links as needed */
-}
 
-.nav-desktop a {
-    position: relative;
-    text-decoration: none;
-    color: rgb(255, 255, 255); /* Adjust the text color as needed */
-    padding: 5px 0; /* Adjust the padding as needed */
-}
 
-/* Hover effect for desktop navigation */
-.nav-desktop a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -2px; /* Slightly below the text */
-    width: 0;
-    height: 2px; /* Adjust the height of the bar */
-    background-color: rgb(127, 197, 244); /* Adjust the color of the bar */
-    transform: translateX(-50%);
-    transition: width 0.3s ease;
-}
 
-.nav-desktop a:hover::after {
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    html,
+    body {
+      background-size: cover;
+    }
+    .scrolled-up .svg-container {
+        top: 30px;
+        left: 50px;
+        transform: translate(0, 0);
+        width: 10px; 
+  
+    }
+    .navbar{
+        width: 100%;
+        background:black;
+    }
+  .navright {
+    
+    display: grid;
+    justify-items: end;
+    grid-template-columns: 1fr;
+    align-items: center;
+    background:black;
+    padding: 10px;
+    position: fixed; /* Make the navbar fixed */
+    top: 0;
     width: 100%;
+    z-index: 3;
+  }
+  .nav-desktop {
+    display: none;
+  }
+  
+  .searchBox {
+    position: relative;
+    background: #275595;
+    height: 20px;
+    border-radius: 40px;
+    right: 20px;
+    padding:7px;
+
 }
 
+.searchBox:hover > .searchInput {
+    width: 240px;
+    padding: 0 6px;
+}
+
+.searchBox:hover > .searchButton {
+  background: white;
+  color : #2f3640;
+}
+
+.fa-search {
+    position: relative;
+    color: white;
+    float: right;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 10px;
+    width: 0px;
+
+}
+
+  .nav-responsive {
+    display: none;
+  }
+  
+  .container {
+    display: block;
+  }
+  
+  .container .bar1,
+  .container .bar2,
+  .container .bar3 {
+    display: block;
+    position: relative;
+    right: 20px;
+  }
+  .navbar a {
+  
+      margin: 0 10px; /* Adjust margin for smaller screens */
+  }
+}
